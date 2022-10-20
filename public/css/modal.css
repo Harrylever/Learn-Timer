@@ -1,0 +1,216 @@
+.modal-container {
+	position: fixed;
+	top: -100%;
+	width: 100vw;
+	height: 100vh;
+	background-color: #00000031;
+}
+.myModal {
+	position: fixed;
+	top: -50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 55vw;
+	border-radius: 20px;
+	background-color: #fff;
+	overflow: hidden;
+}
+
+.myModal > div {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.modal-body {
+	margin-top: 10px;
+	padding: 15px 0;
+	border-top: 1px solid #fff;
+	width: 100%;
+}
+.modal-body > div {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.modal-body > div label, input {
+	font-size: 15px;
+
+}
+.modal-body > div label {
+	margin-left: 10px;
+}
+.modal-body > div > input {
+	width: 91%;
+	margin: 10px auto 2px;
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	height: 30px;
+	padding: 7px 10px;
+	background-color: #007d5c84;
+}
+.modal-body > div > textarea {
+	width: 90%;
+	margin: 10px auto 2px;
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	height: 70px;
+	padding: 7px 10px;
+	background-color: #007d5c84;
+}
+.task-success {
+	color: #01a378;
+	font-weight: 700;
+	display: none;
+}
+.taskerror {
+	padding: 0px 10px;
+	margin: 0 26px 10px !important;
+	font-size: 10px !important;
+	color: #ff0000;
+	font-weight: 100;
+	display: none;
+}
+.modal-close-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: 2px solid #fff;
+	outline: none;
+	width: 2.1rem;
+	height: 2.1rem;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.modal-close-button:hover {
+	background-color: #fff;
+}
+.modal-close-button:hover span {
+	color: #007D5C;
+	transform: rotate(20%);
+}
+
+.estimated_acc_time_container {
+	margin-top: 11px;
+	/* border: 1px solid red; */
+	display: flex;
+	flex-direction: column;
+}
+.estimated_acc_time_sub_container {
+	width: 100%;
+	margin-top: 4px;
+	display: flex;
+	/* border: 1px solid #fff; */
+	justify-content: space-evenly;
+}
+.estimated_acc_time_sub_container > div {
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+}
+.estimated_acc_time_sub_container > div > input {
+	margin-top: 2px;
+	width: 50%;
+	padding: 6px 9px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	background-color: #007d5c84;
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: right;
+	padding: 10px 0 2px;
+}
+
+.lt-modal-footer-btn {
+	margin-left: 20px;
+	background-color: transparent;
+	color: #000;
+	border: 2px solid #fff;
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
+	padding: 7px 12px;
+	font-size: 14px;
+}
+.lt-modal-footer-btn:hover {
+	background-color: #fff;
+	color: #007D5C;
+	transition: .6s;
+	border: 2px solid #007d5c;
+}
+.danger-btn {
+	background-color: #8b0000a1;
+}
+.danger-btn:hover {
+	background-color: darkred;
+	color: #fff !important;
+	border: 2px solid #fff;
+}
+
+.function-result-status-modal-container {
+	position: fixed;
+	display: block;
+	top: -100%;
+	width: 100vw;
+	height: 100vh;
+	background-color: #00000031;
+}
+
+.f-r-s-modal {
+	padding: 20px 10px;
+	position: fixed;
+	top: -20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 40%;
+	border-radius: 20px;
+	background-color: #fff;
+	overflow: hidden;
+}
+.f-r-s-modal p {
+	padding: 4px;
+	border-bottom: 1px solid #0f0f0f84;
+}
+.f-r-s-modal > div {
+	/* border: 1px solid black; */
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	padding: 5px 0;
+}
+.f-r-s-modal > div button {
+	margin: 0 16px 0;
+	background-color: transparent;
+	color: #000;
+	border: 2px solid #fff;
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
+	padding: 7px 12px;
+	font-size: 14px;
+}
+.f-r-s-modal-del-btn {
+	background-color: #8b0000a1 !important;
+}
+.f-r-s-modal-del-btn:hover {
+	background-color: darkred !important;
+	color: #fff !important;
+	border: 2px solid #fff;
+}
+.f-r-s-modal-cancel-btn:hover {
+	background-color: #fff;
+	color: #007D5C !important;
+	transition: .5s;
+	border: 2px solid #007d5c !important;
+}

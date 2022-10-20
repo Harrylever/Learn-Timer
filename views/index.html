@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="images/favicon/site.webmanifest">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/modal.css">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<section class="main-section">
+		<header>
+			<nav>
+				<div>
+					<div class="lt-navbar-logo">
+						<h2>Learn Timer</h2>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<main>
+			<img src="images/curved_arrow_tool.png" alt="curved arrow tool" class="float-images curved_tool_img_first">
+			<img src="images/curved_arrow_tool.png" alt="curved arrow tool" class="float-images curved_tool_img_second">
+			<div>
+				<div class="lt-main-section-div">
+					<div class="lt-side-content-01 lt-side-content">
+						<div class="lt-side-content-01-h2-text-container">
+							<h1>Time Remaining</h1>
+							<button class="lt-btn" id="free-counting-btn"><span id="free-counting-btn-change-text">Start</span> Counting</button>
+						</div>
+						<div class="time-remain-container" id="time-remain-container">
+							<p><span id="time-hour-count">00</span><span class="time-divider">:</span><span id="time-minute-count">00</span><span class="time-divider">:</span><span id="time-second-count">00</span></p>
+						</div>
+						<div class="time-action-btn-container">
+							<button class="lt-btn" id="proj-start-countin-btn">Start</button>
+							<button class="lt-btn" id="proj-pause-countin-btn">Pause</button>
+							<button class="lt-btn" id="proj-reset-countin-btn">Reset</button>
+							<button class="lt-btn" id="proj-store-progress-btn">Store Progress</button>
+						</div>
+					</div>
+					<div class="lt-side-content-02 lt-side-content">
+						<div class="lt-side-content-02-header">
+							<h3>Task and Progress</h3>
+							<button id="refresh-btn">Refresh</button>
+							<button>Clear</button>
+						</div>
+						<div class="task-progress-list" id="task-progress-list-container-id">
+						</div>
+					</div>
+				</div>
+				<div class="lt-note-section">
+					<div class="lt-note-section-header">
+						<h3>Task Notes</h3>
+					</div>
+					<div class="lt-note-section-note-body">
+						<img src="animate/plent cricles.png" alt="Circle menu" id="task-description-loader"/>
+						<div class="lt-note-section-note-body-content" id="lt-note-section-note-body-content">
+							<h2>Task Title: <span id="lt-task-title-text"></span></h2>
+							<p>Created At: <span id="lt-task-created-time"></span></p>
+							<div>
+								<h3>Task Description:</h3>
+								<p class="lt-task-description-text" id="lt-task-description-text"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<div></div>
+		</footer>
+
+		<div class="modal-container" id="modal-container">
+			<div class="myModal" id="myModal">
+				<div>
+					<div class="modal-header">
+						<div class="modal-header-text">My Modal</div>
+						<div>
+							<label for="tasksuccess" class="task-success" id="task-success">Task Added Successfully</label>
+						</div>
+						<div class="close-button">
+							<button class="modal-close-button" id="modal-cls-btn"><span class="material-symbols-outlined" id="modal-cls-btn">close</span></button>
+						</div>
+					</div>
+					<form action="">
+						<div class="modal-body">
+							<div>
+								<label for="TaskTitle">Enter Task Title<span class="red_asterisk">*</span></label>
+								<input type="text" name="task_title" id="task_title_input" required>
+								<label for="tasktitleerror" class="taskerror" id="task-title-error">Error: enter a valid task title</label>
+							</div>
+							<div>
+								<label for="TaskDescription">Enter Task Description<span class="red_asterisk">*</span></label>
+								<textarea name="task_description" id="task_description_input" cols="30" rows="10" required></textarea>
+								<label for="taskdescriptionerror" class="taskerror" id="task-description-error">Error: enter a valid task title</label>
+							</div>
+							<div class="estimated_acc_time_container">
+								<label for="EstimateTime">Estimated Accomplish Time</label>
+								<div class="estimated_acc_time_sub_container">
+									<div>
+										<label for="hours">Hours</label>
+										<input type="number" name="estimated_time" min="0" max="12" value="0" id="estimated_time">
+									</div>
+									<div>
+										<label for="miuntes">Minutes</label>
+										<input type="number" name="estimated_time" min="0" max="59" value="0" id="estimated_time">
+									</div>
+									<div>
+										<label for="seconds">Seconds</label>
+										<input type="number" name="estimated_time" min="0" max="59" value="0" id="estimated_time">
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="modal-footer">
+							<button type="button" class="lt-modal-footer-btn danger-btn" id="modal-cls-btn-2">Close</button>
+							<button type="button" class="lt-modal-footer-btn" id="save-start-btn" type="submit">Save & Start</button>
+							<button type="submit" class="lt-modal-footer-btn" id="save-btn" type="button">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="function-result-status-modal-container" id="f-r-s-modal-container">
+			<div class="f-r-s-modal" id="f-r-s-modal">
+				<h2>Are you sure you want delete Task:</h2>
+				<p>Task Title: <span id="confirm-del-modal-title-text"></span></p>
+				<div>
+					<button class="f-r-s-modal-del-btn f-r-s-modal-btn" id="f-r-s-modal-confirm-del-btn">Delete</button>
+					<button class="f-r-s-modal-cancel-btn f-r-s-modal-btn" id="f-r-s-modal-cancel-btn">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery.js"><\/script>')</script>
+	<script src="https://momentjs.com/downloads/moment.js"></script>
+	<script src="js/modal.js"></script>
+	<!-- <script src="js/totask.js"></script> -->
+	<script src="js/new_script.js"></script>	
+	<script src="js/script.js"></script>	
+</body>
+</html>
