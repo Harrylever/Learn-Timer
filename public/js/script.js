@@ -120,13 +120,69 @@ async function add_progress_list() {
 		});
 } 
 
+function set_estimated_timer() {
+	let task_acc_time_hrs = parseInt(task_acc_time_hours.value);
+	let task_acc_time_mnts = parseInt(task_acc_time_minutes.value);
+	let task_acc_time_scnds = parseInt(task_acc_time_seconds.value);
+	
+	let total_seconds_score_hrs = parseInt(task_acc_time_hrs);
+	let total_seconds_score_mnts = parseInt(task_acc_time_mnts);
+
+	let total_seconds_score = total_seconds_score_hrs + total_seconds_score_mnts + parseInt(task_acc_time_scnds);
+	// let estimated_timer = parseInt(task_acc_time_hrs) + parseInt(task_acc_time_mnts) + parseInt(task_acc_time_scnds);
+
+	let hours_time_2_b_display = total_seconds_score_hrs > 1 ? `${total_seconds_score_hrs} Hrs` : `${total_seconds_score_hrs} Hr`;
+	let minutes_time_2_b_display = total_seconds_score_mnts > 1 ? `${total_seconds_score_mnts} Mins` : `${total_seconds_score_mnts} Min`;
+	let seconds_time_2_b_display = parseInt(task_acc_time_scnds) > 1 ? `${parseInt(task_acc_time_scnds)} Secs'` : `${parseInt(task_acc_time_scnds)} Sec`;
+
+	let time_2_b_display = `${hours_time_2_b_display} ${minutes_time_2_b_display} & ${seconds_time_2_b_display}`;
+	// console.log(time_2_b_display);
+
+
+	return {
+		task_acc_time_hrs,
+		task_acc_time_mnts,
+		task_acc_time_scnds,
+		total_seconds_score,
+		time_2_b_display
+	}
+}
+
+function setTimeDisplay(time_display) {
+	let time_display_input = document.getElementById("time_display_input");
+	time_display_input.value = time_display;
+}
+
+task_acc_time_hours.addEventListener("change", (event) => {
+	if (event.target.value > 20) {
+		event.target.value = 20;
+	}
+	setTimeDisplay(set_estimated_timer().time_2_b_display);
+});
+
+task_acc_time_minutes.addEventListener("change", (event) => {
+	if (event.target.value > 59) {
+		event.target.value = 59;
+	}
+	setTimeDisplay(set_estimated_timer().time_2_b_display);
+});
+
+task_acc_time_seconds.addEventListener("change", (event) => {
+	if (event.target.value > 59) {
+		event.target.value = 59;
+	}
+	setTimeDisplay(set_estimated_timer().time_2_b_display);
+});
+
 async function save_task() {
 	let task_title = $('#task_title_input').val();
 	let task_description = $('#task_description_input').val();
-	let task_acc_time_hrs = task_acc_time_hours.value
-	let task_acc_time_mnts = task_acc_time_minutes.value
-	let task_acc_time_scnds = task_acc_time_seconds.value
-	console.log(task_acc_time_hrs, task_acc_time_mnts, task_acc_time_scnds);
+	let estimated_timer_hrs = set_estimated_timer().task_acc_time_hrs;
+	let estimated_timer_mnts = set_estimated_timer().task_acc_time_mnts;
+	let estimated_timer_scnds = set_estimated_timer().task_acc_time_scnds;
+	let estimated_timer = parseInt(estimated_timer_hrs) + parseInt(estimated_timer_mnts) + parseInt(estimated_timer_scnds);
+
+	console.log(estimated_timer);
 
 	if (task_title.length < 4 || task_description.length < 6) {
 		if (task_title.length < 4) {

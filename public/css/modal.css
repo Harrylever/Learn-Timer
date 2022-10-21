@@ -125,6 +125,12 @@
 	border-radius: 5px;
 	background-color: #007d5c84;
 }
+.time_display_input_container {
+	align-items: center;
+}
+.time_display_input {
+	width: 100% !important;
+}
 
 .modal-footer {
 	display: flex;
