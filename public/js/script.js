@@ -11,6 +11,9 @@ let free_counting_btn_change_text = document.getElementById("free-counting-btn-c
 let save_btn = document.getElementById("save-btn");
 let task_title_input = document.getElementById("task_title_input");
 let task_description_input = document.getElementById("task_description_input");
+let task_acc_time_hours = document.getElementById("estimated_time_hours");
+let task_acc_time_minutes = document.getElementById("estimated_time_minutes");
+let task_acc_time_seconds = document.getElementById("estimated_time_seconds");
 // let lt_note_section_note_text = document.getElementById("lt-note-section-note-text");
 // let task_progress_list = document.getElementById("task-progress-list-container-id");
 
@@ -117,9 +120,13 @@ async function add_progress_list() {
 		});
 } 
 
-function save_task() {
+async function save_task() {
 	let task_title = $('#task_title_input').val();
 	let task_description = $('#task_description_input').val();
+	let task_acc_time_hrs = task_acc_time_hours.value
+	let task_acc_time_mnts = task_acc_time_minutes.value
+	let task_acc_time_scnds = task_acc_time_seconds.value
+	console.log(task_acc_time_hrs, task_acc_time_mnts, task_acc_time_scnds);
 
 	if (task_title.length < 4 || task_description.length < 6) {
 		if (task_title.length < 4) {
@@ -137,15 +144,22 @@ function save_task() {
 		return "Error: Improper Task Title/Description";
 	}
 
-	axios({
-		method: 'post',
-		url: '/newproject',
-		data: {
-			tasktitle: task_title,
-			taskdescription: task_description,
-		}
-	}).then((response) => {
-		console.log("Successfully Added Project!");
+	let data = {
+		tasktitle: task_title,
+		taskdescription: task_description,
+	}
+
+	try {
+		const fetchData = await fetch(`/newproject`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		});
+		const dataM = fetchData.json();
+		console.log(dataM);
+		console.log('Task Successfully Added');
 		task_success.style.display = "block";
 		setTimeout(() => {
 			modal.style.top = "-50%";
@@ -154,12 +168,11 @@ function save_task() {
 			task_title_input.value = "";
 			task_description_input.value = "";
 			task_success.style.display = "none";
-			console.log("Save Button Clicked From Script.js");
+			// console.log("Save Button Clicked From Script.js");
 		}, 3000);
-	}).catch((err) => {
-		console.log("Error:");
-		console.error(err);
-	});
+	} catch (err) {
+		console.log(err);
+	};
 	return "Project Added Successfuly: Done";
 }
 
@@ -188,29 +201,6 @@ function fetchToDisplayTaskDesc(id) {
 		console.log("Error:");
 		console.error(err);
 	});
-
-	// axios({
-	// 	method: 'get',
-	// 	url: `/getProject/${task_id}`,
-	// }).then((response) => {
-	// 	let content_data = response.data;
-	// 	function changeText() {
-	// 		lt_task_title_text.innerHTML = content_data["projectTitle"];
-	// 		lt_task_description_text.innerHTML = content_data["projectDescription"];
-	// 		let date_data1 = content_data["createdAt"].slice(0, 10);
-	// 		let date_data2 = content_data["createdAt"].slice(11, 19);
-	// 		let date_data3 = date_data1 + " " + date_data2;
-	// 		lt_task_created_time.innerHTML = moment(date_data3).format('lll');
-	// 	}
-	// 	setTimeout(() => {
-	// 		task_description_loader.style.display = "none";
-	// 		changeText();
-	// 	}, 1200);
-	// 	// console.log(response.data);
-	// }).catch((err) => {
-	// 	console.log("Error:");
-	// 	console.error(err);
-	// });
 }
 
 async function delTaskContent(id) {
@@ -246,7 +236,7 @@ async function delTaskContent(id) {
  * Modal Controllers
  * Add Task and Save Modal
  * Confirm and Delete Task Modal
- * Create 
+ * Create
  */ 
 function displayDelModal(title_text, id) {
 	let modal_container = document.getElementById("f-r-s-modal-container");
@@ -278,9 +268,8 @@ function hideDelModal() {
 
 function getArrDivContent() {
 	let arrDivContent = document.querySelectorAll("#task-progress-list-container-id div .single-project-button");
-	// console.log(arrDivContent ? arrDivContent : "Nothing Available");
 	let arrDivDelContent = document.querySelectorAll("#task-progress-list-container-id div .single-project-del-btn");
-	// console.log(arrDivDelContent ? arrDivDelContent : "Nothing Deletable Available");
+
 	for (let i = 0; i < arrDivContent.length; i++) {
 		let child_0 = arrDivContent[i];
 		// console.log(child);
@@ -338,7 +327,6 @@ refresh_btn.addEventListener("click", () => {
 save_btn.addEventListener("click", (e) => {
 	e.preventDefault();
 	try {
-		// save_task();
 		console.log(save_task());
 	} catch (error) {
 		console.log(error);

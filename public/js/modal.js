@@ -16,7 +16,6 @@ const showModal = () => {
 	modal.style.top = "50%";
 	modal.style.transition = "1.2s";
 	modal_container.style.top = "0%";
-	// console.log("Modal Opened")
 }
 
 modal_cls_btn.addEventListener("click", () => {

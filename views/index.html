@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/modal.css">
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 	<section class="main-section">
@@ -108,15 +107,19 @@
 								<div class="estimated_acc_time_sub_container">
 									<div>
 										<label for="hours">Hours</label>
-										<input type="number" name="estimated_time" min="0" max="12" value="0" id="estimated_time">
+										<input type="number" name="estimated_time" min="0" max="12" value="0" id="estimated_time_hours">
 									</div>
 									<div>
 										<label for="miuntes">Minutes</label>
-										<input type="number" name="estimated_time" min="0" max="59" value="0" id="estimated_time">
+										<input type="number" name="estimated_time" min="0" max="59" value="0" id="estimated_time_minutes">
 									</div>
 									<div>
 										<label for="seconds">Seconds</label>
-										<input type="number" name="estimated_time" min="0" max="59" value="0" id="estimated_time">
+										<input type="number" name="estimated_time" min="0" max="59" value="0" id="estimated_time_seconds">
+									</div>
+									<div>
+										<label for="timedisplay">Time Display</label>
+										<input type="text" value="let's g0 14" disabled>
 									</div>
 								</div>
 							</div>
@@ -148,8 +151,7 @@
 	<script>window.jQuery || document.write('<script src="js/jquery.js"><\/script>')</script>
 	<script src="https://momentjs.com/downloads/moment.js"></script>
 	<script src="js/modal.js"></script>
-	<!-- <script src="js/totask.js"></script> -->
-	<script src="js/new_script.js"></script>	
+	<!-- <script src="js/new_script.js"></script> -->
 	<script src="js/script.js"></script>	
 </body>
 </html>
