@@ -197,7 +197,7 @@ main > div {
 	border: none;
 	background-color: transparent;
 }
-.task-progress-list > div .single-project-button {
+.task-progress-list > div .single-task-button {
 	background-color: transparent;
 	/* border: none; */
 	outline: none;
@@ -205,17 +205,17 @@ main > div {
 	height: 100%;
 	cursor: pointer;
 }
-.task-progress-list > div .single-project-del-btn {
+.task-progress-list > div .single-task-del-btn {
 	width: 8%;
 	opacity: .08;
 }
-.task-progress-list > div .single-project-del-btn:hover {
+.task-progress-list > div .single-task-del-btn:hover {
 	opacity: 1;
 	cursor: pointer;
 	border-radius: 4px;
 	background-color: #c9564744;
 }
-.task-progress-list > div .single-project-del-btn img {
+.task-progress-list > div .single-task-del-btn img {
 	opacity: .7;
 	width: 100%;
 }

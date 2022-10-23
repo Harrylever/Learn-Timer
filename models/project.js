@@ -1,14 +1,35 @@
 module.exports = ( sequelize, DataTypes ) => {
-	const Project = sequelize.define("Project", {
-		projectTitle: {
+	const Task = sequelize.define("Task", {
+		taskTitle: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {
 				notEmpty: true
 			}
 		},
-		projectDescription: {
+		taskDescription: {
 			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		hours: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		minutes: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		seconds: {
+			type: DataTypes.INTEGER,
 			allowNull: false,
 			validate: {
 				notEmpty: true
@@ -16,5 +37,5 @@ module.exports = ( sequelize, DataTypes ) => {
 		},
 	});
 
-	return Project;
+	return Task;
 };

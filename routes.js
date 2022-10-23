@@ -10,15 +10,26 @@ app.get('/', siteController.index);
 
 app.get('/about', siteController.about);
 
-app.post('/newproject', postController.newProject);
-// app.post('/newproject', function(req, res) {
-// 	res.json(req.body);
-// });
 
+// Task - Controllers
+app.get('/getAllTasks', getController.getTasks);
+
+app.get('/getTask/:taskId', getController.getSingleTask);
+
+app.post('/newtask', postController.newTask);
+
+app.post('/deleteTask', postController.deleteTask);
+
+
+// Project - Controllers
 app.get('/getAllProjects', getController.getProjects);
 
 app.get('/getProject/:projectId', getController.getSingleProject);
 
+app.post('/newproject', postController.newProject);
+
+
+// User - Controllers
 app.post('/newuser', postController.newUser);
 
 app.post('/deleteProject', postController.deleteProject);

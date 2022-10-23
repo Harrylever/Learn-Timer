@@ -94,7 +94,7 @@ async function add_progress_list() {
 	while (task_progress_list_container_id.hasChildNodes()) {
 		task_progress_list_container_id.removeChild(task_progress_list_container_id.firstChild);
 	}
-	await fetch("/getAllProjects")
+	await fetch("/getAllTask")
 		.then((response) => response.json())
 		.then((data) => {
 			let data2 = data;
@@ -102,15 +102,15 @@ async function add_progress_list() {
 				let div_container = document.createElement("div");
 				let button_node = document.createElement("button");
 				button_node.id = `project-id-${data2[i]["id"]}`;
-				button_node.className = "single-project-button";
+				button_node.className = "single-task-button";
 				let data_text_cont = document.createElement("h3");
 				let del_btn = document.createElement("button");
-				del_btn.className = "single-project-del-btn";
-				del_btn.id = `project-id-${data2[i]["id"]}`;
+				del_btn.className = "single-task-del-btn";
+				del_btn.id = `task-id-${data2[i]["id"]}`;
 				let del_node_image = document.createElement("img");
 				del_node_image.src = "images/icons8-trash-can.png";
 				del_btn.appendChild(del_node_image);
-				let textnode = document.createTextNode(data2[i]["projectTitle"]);
+				let textnode = document.createTextNode(data2[i]["taskTitle"]);
 				data_text_cont.appendChild(textnode);
 				button_node.appendChild(data_text_cont);
 				div_container.appendChild(button_node);
@@ -129,7 +129,6 @@ function set_estimated_timer() {
 	let total_seconds_score_mnts = parseInt(task_acc_time_mnts);
 
 	let total_seconds_score = total_seconds_score_hrs + total_seconds_score_mnts + parseInt(task_acc_time_scnds);
-	// let estimated_timer = parseInt(task_acc_time_hrs) + parseInt(task_acc_time_mnts) + parseInt(task_acc_time_scnds);
 
 	let hours_time_2_b_display = total_seconds_score_hrs > 1 ? `${total_seconds_score_hrs} Hrs` : `${total_seconds_score_hrs} Hr`;
 	let minutes_time_2_b_display = total_seconds_score_mnts > 1 ? `${total_seconds_score_mnts} Mins` : `${total_seconds_score_mnts} Min`;
@@ -180,9 +179,9 @@ async function save_task() {
 	let estimated_timer_hrs = set_estimated_timer().task_acc_time_hrs;
 	let estimated_timer_mnts = set_estimated_timer().task_acc_time_mnts;
 	let estimated_timer_scnds = set_estimated_timer().task_acc_time_scnds;
-	let estimated_timer = parseInt(estimated_timer_hrs) + parseInt(estimated_timer_mnts) + parseInt(estimated_timer_scnds);
+	// let estimated_timer = parseInt(estimated_timer_hrs) + parseInt(estimated_timer_mnts) + parseInt(estimated_timer_scnds);
 
-	console.log(estimated_timer);
+	// console.log(estimated_timer);
 
 	if (task_title.length < 4 || task_description.length < 6) {
 		if (task_title.length < 4) {
@@ -203,10 +202,13 @@ async function save_task() {
 	let data = {
 		tasktitle: task_title,
 		taskdescription: task_description,
+		hours: estimated_timer_hrs,
+		minutes: estimated_timer_mnts,
+		seconds: estimated_timer_scnds,
 	}
 
 	try {
-		const fetchData = await fetch(`/newproject`, {
+		const fetchData = await fetch('/newtask', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -224,10 +226,9 @@ async function save_task() {
 			task_title_input.value = "";
 			task_description_input.value = "";
 			task_success.style.display = "none";
-			// console.log("Save Button Clicked From Script.js");
 		}, 3000);
 	} catch (err) {
-		console.log(err);
+		console.error('Error:', err);
 	};
 	return "Project Added Successfuly: Done";
 }
@@ -237,13 +238,13 @@ function fetchToDisplayTaskDesc(id) {
 	task_description_loader.style.display = "block";
 	let task_id = id;
 
-	fetch(`/getProject/${task_id}`)
+	fetch(`/getTask/${task_id}`)
 	.then((response) => response.json())
 	.then((data) => {
 		let content_data = data;
 		function changeText() {
-			lt_task_title_text.innerHTML = content_data["projectTitle"];
-			lt_task_description_text.innerHTML = content_data["projectDescription"];
+			lt_task_title_text.innerHTML = content_data["taskTitle"];
+			lt_task_description_text.innerHTML = content_data["taskDescription"];
 			let date_data1 = content_data["createdAt"].slice(0, 10);
 			let date_data2 = content_data["createdAt"].slice(11, 19);
 			let date_data3 = date_data1 + " " + date_data2;
@@ -264,7 +265,7 @@ async function delTaskContent(id) {
 	let	data = { task_id: task_id }
 
 	try {
-		const fetchData = await fetch(`/deleteProject`, {
+		const fetchData = await fetch(`/deleteTask`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -323,8 +324,8 @@ function hideDelModal() {
 }
 
 function getArrDivContent() {
-	let arrDivContent = document.querySelectorAll("#task-progress-list-container-id div .single-project-button");
-	let arrDivDelContent = document.querySelectorAll("#task-progress-list-container-id div .single-project-del-btn");
+	let arrDivContent = document.querySelectorAll("#task-progress-list-container-id div .single-task-button");
+	let arrDivDelContent = document.querySelectorAll("#task-progress-list-container-id div .single-task-del-btn");
 
 	for (let i = 0; i < arrDivContent.length; i++) {
 		let child_0 = arrDivContent[i];
