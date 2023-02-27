@@ -15,11 +15,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-db.sequelize.sync().then((req) => {	
-	app.listen(port, () => {
-		console.log(`server running on port http://localhost:${port}`)
-	});
+app.listen(3200, () => {
+	console.log(`server running on port http://localhost:${3200}`)
 });
+// db.sequelize.sync().then((req) => {	
+// });
 
 module.exports.app = app;
 routes = require("./routes");
